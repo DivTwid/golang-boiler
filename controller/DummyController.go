@@ -3,6 +3,7 @@ package controller
 import (
 	"net/http"
 
+	"github.com/DivTwid/golang-boiler/dto"
 	"github.com/DivTwid/golang-boiler/service"
 
 	"github.com/gin-gonic/gin"
@@ -23,5 +24,7 @@ func (d DummyController) GetVal(ctx *gin.Context) {
 }
 
 func (d DummyController) AddVal(ctx *gin.Context) {
-	ctx.JSON(http.StatusCreated, d.ds.AddVal())
+	bind := dto.UserDto{}
+	ctx.ShouldBindJSON(&bind)
+	ctx.JSON(http.StatusCreated, d.ds.AddVal(bind))
 }
