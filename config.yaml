@@ -1,0 +1,32 @@
+development:
+  database:
+    host: "localhost"
+    port: "5432"
+    name: "test"
+    username: "root"
+    password: "root"
+  app:
+    port: "4000"
+    log_level: "debug"
+
+test:
+  database:
+    host: "localhost"
+    port: 3306
+    name: "mydb_test"
+    username: "test_user"
+    password: "test_password"
+  app:
+    port: 8081
+    log_level: "info"
+
+production:
+  database:
+    host: "db.example.com"
+    port: 5432
+    name: "mydb_prod"
+    username: "prod_user"
+    password: "prod_password"
+  app:
+    port: 80
+    log_level: "warn"

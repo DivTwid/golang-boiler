@@ -1,26 +1,43 @@
 package main
 
 import (
-	"os"
+	"log"
 
 	"github.com/DivTwid/golang-boiler/config"
+	"github.com/DivTwid/golang-boiler/db"
+	"github.com/DivTwid/golang-boiler/db/migration"
 	"github.com/DivTwid/golang-boiler/router"
 )
 
-const (
-	path = "env/.env_test"
-)
-
-func init() {
-	config.LoadENV(path)
-	ps := config.NewPostgresDB()
-	ps.InitializeDB()
-	migrate := config.NewMigration(config.PqDB)
-	migrate.Migrate()
-	// migrate.Seed()
-}
-
 func main() {
+	// Load Config
+	config, err := config.LoadConfig()
+	if err != nil {
+		log.Fatalf("Error loading config", err)
+	}
+
+	//Initialize Postgres DB
+	postgres := db.PostgresDB{
+		Host:     config.Database.Host,
+		User:     config.Database.Username,
+		Password: config.Database.Password,
+		Port:     config.Database.Port,
+		DB:       config.Database.Name,
+		Sslmode:  "disable",
+		Timezone: "Asia/Shanghai",
+	}
+	postgres.Init()
+
+	//Call Migrations
+	migration := migration.Migration{
+		DB:       db.PqDB,
+		Migrator: db.PqDB.Migrator(),
+	}
+	migration.Migrate()
+	migration.AlterMigrate()
+	migration.Rollback()
+
+	//SetupRoutes
 	routes := router.SetupRouter()
-	routes.Run(":" + os.Getenv("PORT"))
+	routes.Run(":" + config.App.Port)
 }
