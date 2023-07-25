@@ -11,4 +11,4 @@ RUN go mod tidy
 RUN go build /go-boiler
 
 EXPOSE 4000
-ENTRYPOINT [ "./go-boiler" ]
+ENTRYPOINT [ "./golang-boiler" ]

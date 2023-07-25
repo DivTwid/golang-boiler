@@ -16,10 +16,10 @@ run:
 test:
 	go test -v -cover ./...
 
-DockerBuild:
+build:
 	docker build -t go-boiler .
 
-DockerRun:
-	docker run -d -p 7000:4000 go-boiler
+buildrun:
+	docker run -d -p 8000:4000 go-boiler
 
-.PHONY: runDB run installPostgresDriver installCompileDaemon installGin test DockerBuild DockerRun
+.PHONY: runDB run installPostgresDriver installCompileDaemon installGin test build buildrun
