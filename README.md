@@ -26,5 +26,19 @@ Use Following commands
 
 Use following url to run project `localhost:4000`
 
+Post Project is up and running the below mentioned API could be used to test the application:
+```curl --location --request POST '127.0.0.1:4000/addVal' \
+--header 'Authorization: Basic cm9vdDpyb290' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "email": "test@tatwa.com",
+    "name" : "testyUsier2",
+    "phone_no": "1234567543453"
+}'```
+
+
+One can refer Makefile mentioned in the project to test the application test cases using below command 
+```make test```
+
 
 

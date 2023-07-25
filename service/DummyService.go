@@ -33,6 +33,7 @@ func (ds dummyService) AddVal(user dto.UserDto) model.User {
 	ret, err := model.CreateUser(config.PqDB, userModel)
 	if err != nil {
 		log.Fatal("Error while creating user", err)
+		return userModel
 	}
 	return ret
 }
