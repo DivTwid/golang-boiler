@@ -2,6 +2,7 @@ package config
 
 import (
 	"fmt"
+	"os"
 
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
@@ -21,12 +22,11 @@ type PostgresDB struct {
 
 func NewPostgresDB() *PostgresDB {
 	return &PostgresDB{
-		// host: "localhost",
-		host:     "host.docker.internal", //use while building docker image
-		user:     "root",
-		password: "root",
-		dbname:   "test",
-		port:     "5432",
+		host:     os.Getenv("DB_HOST"),
+		user:     os.Getenv("DB_USER"),
+		password: os.Getenv("DB_PASSWORD"),
+		dbname:   os.Getenv("DB_DATABASE"),
+		port:     os.Getenv("DB_PORT"),
 		sslmode:  "disable",
 		timezone: "Asia/Shanghai",
 	}
