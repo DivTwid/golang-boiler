@@ -4,6 +4,7 @@ import (
 	"net/http"
 
 	"github.com/DivTwid/golang-boiler/controller"
+	"github.com/DivTwid/golang-boiler/middleware"
 
 	"github.com/gin-gonic/gin"
 )
@@ -25,6 +26,7 @@ func SetupRouter() *gin.Engine {
 }
 
 func DummyRoutes(route *gin.Engine, ctrl controller.DummyController) {
-	route.GET("/addVal", ctrl.AddVal)
-	route.GET("/getVal", ctrl.GetVal)
+	authRoutes := route.Group("/", gin.BasicAuth(middleware.AuthDetails()))
+	authRoutes.POST("addVal", ctrl.AddVal)
+	authRoutes.GET("getVal", ctrl.GetVal)
 }

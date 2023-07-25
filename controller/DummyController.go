@@ -20,7 +20,6 @@ func NewDummyController() *DummyController {
 
 func (d DummyController) GetVal(ctx *gin.Context) {
 	ctx.String(http.StatusOK, d.ds.GetVal())
-	return
 }
 
 func (d DummyController) AddVal(ctx *gin.Context) {
