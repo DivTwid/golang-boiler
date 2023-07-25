@@ -11,7 +11,7 @@ installGin:
 	go get github.com/gin-gonic/gin
 
 run:
-	CompileDaemon -command="./go-boiler"
+	CompileDaemon -command="./golang-boiler"
 
 test:
 	go test -v -cover ./...

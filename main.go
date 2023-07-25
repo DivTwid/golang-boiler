@@ -17,7 +17,7 @@ func init() {
 	ps.InitializeDB()
 	migrate := config.NewMigration(config.PqDB)
 	migrate.Migrate()
-	migrate.Seed()
+	// migrate.Seed()
 }
 
 func main() {
