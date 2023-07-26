@@ -21,8 +21,11 @@ func CreateUser(db *gorm.DB, user User) (User, error) {
 	return user, nil
 }
 
-func GetUsers(db *gorm.DB) {
-	var user User
+func GetUsers(db *gorm.DB) []User {
+	var user []User
 	result := db.Find(&user)
-	fmt.Println("result", result)
+	if result.Error != nil {
+		fmt.Println("result error", result.Error)
+	}
+	return user
 }

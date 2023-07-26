@@ -9,7 +9,7 @@ import (
 )
 
 type DummyService interface {
-	GetVal() string
+	GetVal() []model.User
 	AddVal(user dto.UserDto) model.User
 }
 type dummyService struct {
@@ -19,8 +19,9 @@ func NewDummyService() DummyService {
 	return &dummyService{}
 }
 
-func (ds dummyService) GetVal() string {
-	return "pong"
+func (ds dummyService) GetVal() []model.User {
+	ret := model.GetUsers(db.PqDB)
+	return ret
 }
 
 func (ds dummyService) AddVal(user dto.UserDto) model.User {
