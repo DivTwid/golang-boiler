@@ -43,6 +43,8 @@ Project Overview:
         - DummyService.go
     - templates
         - index.tmpl
+    - utils
+        - errorHandler.go
 
 To Run project from docker
 
