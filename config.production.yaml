@@ -1,0 +1,10 @@
+production:
+  database:
+    host: "db.example.com"
+    port: 5432
+    name: "mydb_prod"
+    username: "prod_user"
+    password: "prod_password"
+  app:
+    port: 80
+    log_level: "warn"

@@ -9,13 +9,21 @@ import (
 )
 
 type Config struct {
-	Database struct {
+	DatabasePostgres struct {
 		Host     string `yaml:"host"`
 		Port     string `yaml:"port"`
 		Name     string `yaml:"name"`
 		Username string `yaml:"username"`
 		Password string `yaml:"password"`
-	} `yaml:"database"`
+	} `yaml:"database_postgres"`
+
+	DatabaseMysql struct {
+		Host     string `yaml:"host"`
+		Port     string `yaml:"port"`
+		Name     string `yaml:"name"`
+		Username string `yaml:"username"`
+		Password string `yaml:"password"`
+	} `yaml:"database_mysql"`
 
 	App struct {
 		Port     string `yaml:"port"`
@@ -28,7 +36,7 @@ func LoadConfig() (*Config, error) {
 	if env == "" {
 		env = "development"
 	}
-	configFile := "config.yaml"
+	configFile := "config." + env + ".yaml"
 	data, err := ioutil.ReadFile(configFile)
 	if err != nil {
 		return nil, err

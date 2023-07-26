@@ -1,0 +1,16 @@
+development:
+  database_postgres:
+    host: "localhost"
+    port: "5432"
+    name: "test"
+    username: "root"
+    password: "root"
+  database_mysql:
+    host : "localhost"
+    port : "3306"
+    name : "test"
+    username : "root"
+    password: "root"
+  app:
+    port: "4000"
+    log_level: "debug"
