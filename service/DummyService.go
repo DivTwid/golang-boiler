@@ -1,6 +1,9 @@
 package service
 
 import (
+	"log"
+
+	"github.com/DivTwid/golang-boiler/db"
 	"github.com/DivTwid/golang-boiler/dto"
 	"github.com/DivTwid/golang-boiler/model"
 )
@@ -27,10 +30,10 @@ func (ds dummyService) AddVal(user dto.UserDto) model.User {
 		PhoneNo: user.PhoneNo,
 	}
 
-	// ret, err := model.CreateUser(config.PqDB, userModel)
-	// if err != nil {
-	// 	log.Fatal("Error while creating user", err)
-	// 	return userModel
-	// }
-	return userModel
+	ret, err := model.CreateUser(db.PqDB, userModel)
+	if err != nil {
+		log.Fatal("Error while creating user", err)
+		return userModel
+	}
+	return ret
 }
