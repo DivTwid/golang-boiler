@@ -8,7 +8,7 @@ import (
 	"gorm.io/gorm"
 )
 
-//Global Postgres DB instance
+// Global Postgres DB instance
 var PqDB *gorm.DB
 var MysqlDB *gorm.DB
 

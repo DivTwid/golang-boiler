@@ -3,20 +3,40 @@
 This is a basic Go lang boiler plate with Gin-gonic and GORM implementation
 
 To Start with the mentioned boiler plate simply clone the repository and run following commands
-`go run main.go`
+`ENV=development go run main.go`
 
 Project Overview:
 
-    Main.go
-        - Init
-            - Initialize ENV
-            - Initialize Database
-            - Run Migration
-            - Run Seeder
-        - Main
-            - Calls Gin Routes
-            - Serves the project on the port mentioned in the env file
-
+    - main.go
+    - config.development.yaml
+    - config.production.yaml
+    - Dockerfile
+    - Makefile
+    - README.md
+    - config/
+        - config.go
+    - controller/
+     - DummyController.go
+    - db/
+        - migration/
+          - migrate.go
+        - seeders
+          - UserSeeders.go
+        - db.go
+    - dto
+        - UserDto.go
+    - env
+        - .env_test
+    - middleware
+        - basicAuth.go
+    - model
+        - users.go
+    - router
+        - routes.go
+    - service
+        - DummyService.go
+    - templates
+        - index.tmpl
 
 To Run project from docker
 
@@ -35,10 +55,6 @@ Post Project is up and running the below mentioned API could be used to test the
     "name" : "testyUsier2",
     "phone_no": "1234567543453"
 }'`
-
-
-One can refer Makefile mentioned in the project to test the application test cases using below command 
-`make test`
 
 
 
