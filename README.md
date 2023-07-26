@@ -2,7 +2,11 @@
 
 This is a basic Go lang boiler plate with Gin-gonic and GORM implementation
 
-To Start with the mentioned boiler plate simply clone the repository and run following commands
+Prerequisites:
+    - Postgres SQL should be running on local machine on 5432 port
+    - MySQL should be running on local machine on 3306 port
+
+To Start with the mentioned boiler plate simply clone the repository and run following command:
 `ENV=development go run main.go`
 
 Project Overview:
