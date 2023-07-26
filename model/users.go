@@ -9,7 +9,7 @@ import (
 type User struct {
 	*gorm.Model
 	Name    string
-	Email   string `gorm:"uniqueKey;uniqueIndex" json:"email"`
+	Email   string `json:"email"`
 	PhoneNo string
 }
 

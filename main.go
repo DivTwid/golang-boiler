@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"log"
 
 	"github.com/DivTwid/golang-boiler/config"
@@ -17,8 +16,17 @@ func main() {
 	if err != nil {
 		log.Fatalf("Error loading config", err)
 	}
-	fmt.Println("Database Host:", config.DatabasePostgres.Host)
 	//Initialize Postgres DB
+	InitializePostgres(*config)
+	//Initialize Mysql DB
+	InitializeMysql(*config)
+	//SetupRoutes
+	routes := router.SetupRouter()
+	routes.Run(":" + config.App.Port)
+
+}
+
+func InitializePostgres(config config.Config) {
 	postgres := db.PostgresDB{
 		Host:     config.DatabasePostgres.Host,
 		User:     config.DatabasePostgres.Username,
@@ -44,7 +52,9 @@ func main() {
 		DB: db.PqDB,
 	}
 	seed.UserSeeder()
+}
 
+func InitializeMysql(config config.Config) {
 	//Initialize Mysql
 	mysql := db.MySqlDB{
 		Host:     config.DatabaseMysql.Host,
@@ -56,8 +66,15 @@ func main() {
 
 	mysql.Init()
 
-	//SetupRoutes
-	routes := router.SetupRouter()
-	routes.Run(":" + config.App.Port)
+	migration := migration.Migration{
+		DB:       db.MysqlDB,
+		Migrator: db.MysqlDB.Migrator(),
+	}
+	migration.Migrate()
 
+	//Seed Data
+	seed := seeders.Seeder{
+		DB: db.MysqlDB,
+	}
+	seed.UserSeeder()
 }
