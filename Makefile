@@ -7,11 +7,8 @@ runMysqlDB:
 installCompileDaemon:
 	go get github.com/githubnemo/CompileDaemon
 
-installPostgresDriver:
-	go get gorm.io/driver/postgres
-
-installGin:
-	go get github.com/gin-gonic/gin
+tidy:
+	go mod tidy
 
 run:
 	CompileDaemon -command="./golang-boiler"
@@ -25,4 +22,4 @@ build:
 buildrun:
 	docker run -d -p 8000:4000 go-boiler
 
-.PHONY: runPostgresDB runMysqlDB run installPostgresDriver installCompileDaemon installGin test build buildrun
+.PHONY: runPostgresDB runMysqlDB run tidy installCompileDaemon test build buildrun

@@ -67,4 +67,17 @@ Post Project is up and running the below mentioned API could be used to test the
 }'`
 
 
+Use Makefile for following commands:
+
+    `make runPostgresDB` -> run Postgres docker container, if image is present in the system
+    `make runMysqlDB` -> run Mysql docker container, if image is present in the system
+    `make installCompileDaemon` -> installs CompileDaemon
+    `make installPostgresDriver` -> install postgres driver for gorm
+    `make tidy` -> installs all the go mod required to run the project
+    `make run` -> runs project using CompileDaemon
+    `make test` -> runs all the test present in the project
+    `make build` -> builds docker image for the project
+    `make buildrun` -> run docker container for the project expose it to port 4000
+
+
 
