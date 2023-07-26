@@ -9,6 +9,10 @@ import (
 	"gorm.io/gorm"
 )
 
+type Seeder struct {
+	DB *gorm.DB
+}
+
 func genRandUser() model.User {
 	user := model.User{
 		Name:    uuid.NewString()[:10],
@@ -18,10 +22,10 @@ func genRandUser() model.User {
 	return user
 }
 
-func UserSeeder(db *gorm.DB) []model.User {
+func (s Seeder) UserSeeder() []model.User {
 	user := []model.User{}
 	for i := 0; i < 5; i++ {
-		usr, err := model.CreateUser(db, genRandUser())
+		usr, err := model.CreateUser(s.DB, genRandUser())
 		if err != nil {
 			log.Print("Error", err.Error())
 		} else {

@@ -14,7 +14,6 @@ type Migration struct {
 
 func (m Migration) Migrate() {
 	m.DB.AutoMigrate(&model.User{})
-
 }
 
 func (m Migration) Rollback() {
@@ -23,7 +22,7 @@ func (m Migration) Rollback() {
 }
 
 func (m Migration) AlterMigrate() {
-	m.Migrator.RenameColumn(&model.User{}, "Name", "Fullname")
+	m.Migrator.RenameColumn(&model.User{}, "Fullname", "Name")
 	m.Migrator.AddColumn(&model.User{}, "Age")
 	fmt.Println("Alter migrations completed successfully.")
 }

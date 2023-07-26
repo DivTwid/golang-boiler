@@ -6,6 +6,7 @@ import (
 	"github.com/DivTwid/golang-boiler/config"
 	"github.com/DivTwid/golang-boiler/db"
 	"github.com/DivTwid/golang-boiler/db/migration"
+	"github.com/DivTwid/golang-boiler/db/seeders"
 	"github.com/DivTwid/golang-boiler/router"
 )
 
@@ -28,14 +29,20 @@ func main() {
 	}
 	postgres.Init()
 
-	//Call Migrations
+	//Run Migrations
 	migration := migration.Migration{
 		DB:       db.PqDB,
 		Migrator: db.PqDB.Migrator(),
 	}
 	migration.Migrate()
 	migration.AlterMigrate()
-	migration.Rollback()
+	// migration.Rollback()
+
+	//Seed Data
+	seed := seeders.Seeder{
+		DB: db.PqDB,
+	}
+	seed.UserSeeder()
 
 	//SetupRoutes
 	routes := router.SetupRouter()
