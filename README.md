@@ -8,7 +8,9 @@ Prerequisites:
     - MySQL should be running on local machine on 3306 port
 
 To Start with the mentioned boiler plate simply clone the repository and run following command:
-
+    
+    `go mod tidy`
+    `change configurations as per local credentials in config.development.yaml`
     `ENV=development go run main.go`
 
 Project Overview:
