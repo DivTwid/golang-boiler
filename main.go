@@ -25,12 +25,11 @@ func main() {
 	InitializeRedis(*config)
 	//Initialize Logs
 	logs.InitLogger()
-	//Cron
-	cron.Cron()
-
 	//SetupRoutes
 	routes := router.SetupRouter()
 	routes.Run(":" + config.App.Port)
+	//Cron
+	cron.Cron()
 
 }
 

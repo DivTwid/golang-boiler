@@ -1,6 +1,7 @@
 package logs
 
 import (
+	"fmt"
 	"log"
 	"os"
 )
@@ -30,6 +31,7 @@ func InitLogger() {
 	infoLogger = log.New(infoFile, "INFO: ", log.Ldate|log.Ltime|log.Lshortfile)
 	warningLogger = log.New(warningFile, "WARNING: ", log.Ldate|log.Ltime|log.Lshortfile)
 	errorLogger = log.New(errorFile, "ERROR: ", log.Ldate|log.Ltime|log.Lshortfile)
+	fmt.Println("logger initialized")
 }
 
 // Info logs an informational message

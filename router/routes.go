@@ -5,7 +5,6 @@ import (
 
 	"github.com/DivTwid/golang-boiler/controller"
 	"github.com/DivTwid/golang-boiler/middleware"
-	"github.com/DivTwid/golang-boiler/utils"
 
 	"github.com/gin-gonic/gin"
 )
@@ -25,7 +24,10 @@ func SetupRouter() *gin.Engine {
 	DummyRoutes(routes, *dummyController)
 
 	routes.NoRoute(func(c *gin.Context) {
-		utils.HandleError(c, http.StatusNotFound, "Route not found")
+		c.HTML(http.StatusOK, "404.tmpl", gin.H{
+			"title": "Go Boiler",
+			"para":  "Some details will go here",
+		})
 	})
 	return routes
 }
