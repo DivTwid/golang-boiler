@@ -25,6 +25,12 @@ type Config struct {
 		Password string `yaml:"password"`
 	} `yaml:"database_mysql"`
 
+	Redis struct {
+		Host     string `yaml:"host"`
+		Port     string `yaml:"port"`
+		Password string `yaml:"password"`
+		DB       int    `yaml:"db"`
+	} `yaml:"redis"`
 	App struct {
 		Port     string `yaml:"port"`
 		LogLevel string `yaml:"log_level"`

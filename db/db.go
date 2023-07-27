@@ -3,6 +3,7 @@ package db
 import (
 	"log"
 
+	"github.com/redis/go-redis/v9"
 	"gorm.io/driver/mysql"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
@@ -11,6 +12,7 @@ import (
 // Global Postgres DB instance
 var PqDB *gorm.DB
 var MysqlDB *gorm.DB
+var Redis *redis.Client
 
 type PostgresDB struct {
 	Host     string
@@ -48,4 +50,20 @@ func (ms MySqlDB) Init() {
 	}
 	log.Print("Mysql Connection success")
 	MysqlDB = db
+}
+
+type RedisClient struct {
+	Host     string
+	Port     string
+	Password string
+	DB       int
+}
+
+func (rs RedisClient) Init() {
+	rdb := redis.NewClient(&redis.Options{
+		Addr:     rs.Host + ":" + rs.Port,
+		Password: rs.Password,
+		DB:       rs.DB,
+	})
+	Redis = rdb
 }

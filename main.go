@@ -20,6 +20,8 @@ func main() {
 	InitializePostgres(*config)
 	//Initialize Mysql DB
 	InitializeMysql(*config)
+	//Initialize Redis
+	InitializeRedis(*config)
 	//SetupRoutes
 	routes := router.SetupRouter()
 	routes.Run(":" + config.App.Port)
@@ -77,4 +79,14 @@ func InitializeMysql(config config.Config) {
 		DB: db.MysqlDB,
 	}
 	seed.UserSeeder()
+}
+
+func InitializeRedis(config config.Config) {
+	redis := db.RedisClient{
+		Host:     config.Redis.Host,
+		Password: config.Redis.Password,
+		Port:     config.Redis.Port,
+		DB:       config.Redis.DB,
+	}
+	redis.Init()
 }
