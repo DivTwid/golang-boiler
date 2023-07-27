@@ -4,6 +4,7 @@ import (
 	"log"
 
 	"github.com/DivTwid/golang-boiler/config"
+	"github.com/DivTwid/golang-boiler/cron"
 	"github.com/DivTwid/golang-boiler/db"
 	"github.com/DivTwid/golang-boiler/db/migration"
 	"github.com/DivTwid/golang-boiler/logs"
@@ -24,6 +25,9 @@ func main() {
 	InitializeRedis(*config)
 	//Initialize Logs
 	logs.InitLogger()
+	//Cron
+	cron.Cron()
+
 	//SetupRoutes
 	routes := router.SetupRouter()
 	routes.Run(":" + config.App.Port)
