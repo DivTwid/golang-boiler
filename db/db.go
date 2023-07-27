@@ -1,6 +1,8 @@
 package db
 
 import (
+	"context"
+	"fmt"
 	"log"
 
 	"github.com/redis/go-redis/v9"
@@ -66,4 +68,11 @@ func (rs RedisClient) Init() {
 		DB:       rs.DB,
 	})
 	Redis = rdb
+	ctx := context.Background()
+	pong, err := rdb.Ping(ctx).Result()
+	if err != nil || pong != "PONG" {
+		panic("Redis connection failure")
+	} else {
+		fmt.Println("Redis connection success")
+	}
 }
