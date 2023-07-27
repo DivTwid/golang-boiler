@@ -6,7 +6,7 @@ import (
 	"github.com/DivTwid/golang-boiler/config"
 	"github.com/DivTwid/golang-boiler/db"
 	"github.com/DivTwid/golang-boiler/db/migration"
-	"github.com/DivTwid/golang-boiler/db/seeders"
+	"github.com/DivTwid/golang-boiler/logs"
 	"github.com/DivTwid/golang-boiler/router"
 )
 
@@ -22,6 +22,8 @@ func main() {
 	InitializeMysql(*config)
 	//Initialize Redis
 	InitializeRedis(*config)
+	//Initialize Logs
+	logs.InitLogger()
 	//SetupRoutes
 	routes := router.SetupRouter()
 	routes.Run(":" + config.App.Port)
@@ -50,10 +52,10 @@ func InitializePostgres(config config.Config) {
 	// migration.Rollback()
 
 	//Seed Data
-	seed := seeders.Seeder{
-		DB: db.PqDB,
-	}
-	seed.UserSeeder()
+	// seed := seeders.Seeder{
+	// 	DB: db.PqDB,
+	// }
+	// seed.UserSeeder()
 }
 
 func InitializeMysql(config config.Config) {
@@ -68,17 +70,17 @@ func InitializeMysql(config config.Config) {
 
 	mysql.Init()
 
-	migration := migration.Migration{
-		DB:       db.MysqlDB,
-		Migrator: db.MysqlDB.Migrator(),
-	}
-	migration.Migrate()
+	// migration := migration.Migration{
+	// 	DB:       db.MysqlDB,
+	// 	Migrator: db.MysqlDB.Migrator(),
+	// }
+	// migration.Migrate()
 
 	//Seed Data
-	seed := seeders.Seeder{
-		DB: db.MysqlDB,
-	}
-	seed.UserSeeder()
+	// seed := seeders.Seeder{
+	// 	DB: db.MysqlDB,
+	// }
+	// seed.UserSeeder()
 }
 
 func InitializeRedis(config config.Config) {

@@ -1,7 +1,7 @@
 package service
 
 import (
-	"log"
+	"fmt"
 
 	"github.com/DivTwid/golang-boiler/db"
 	"github.com/DivTwid/golang-boiler/dto"
@@ -10,7 +10,7 @@ import (
 
 type DummyService interface {
 	GetVal() []model.User
-	AddVal(user dto.UserDto) model.User
+	AddVal(user dto.UserDto) (model.User, error)
 }
 type dummyService struct {
 }
@@ -24,7 +24,7 @@ func (ds dummyService) GetVal() []model.User {
 	return ret
 }
 
-func (ds dummyService) AddVal(user dto.UserDto) model.User {
+func (ds dummyService) AddVal(user dto.UserDto) (model.User, error) {
 	userModel := model.User{
 		Name:    user.Name,
 		Email:   user.Email,
@@ -33,8 +33,8 @@ func (ds dummyService) AddVal(user dto.UserDto) model.User {
 
 	ret, err := model.CreateUser(db.PqDB, userModel)
 	if err != nil {
-		log.Fatal("Error while creating user", err)
-		return userModel
+		fmt.Println("error while user create")
+		return userModel, err
 	}
-	return ret
+	return ret, nil
 }

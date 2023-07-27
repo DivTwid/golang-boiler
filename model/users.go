@@ -3,20 +3,22 @@ package model
 import (
 	"fmt"
 
+	"github.com/DivTwid/golang-boiler/logs"
 	"gorm.io/gorm"
 )
 
 type User struct {
 	*gorm.Model
 	Name    string
-	Email   string `json:"email"`
+	Email   string `gorm:"unique" json:"email"`
 	PhoneNo string
 }
 
 func CreateUser(db *gorm.DB, user User) (User, error) {
 	result := db.Create(&user)
 	if result.Error != nil {
-		return user, result.Error
+		logs.Error("error while generating user" + result.Error.Error())
+		return User{}, result.Error
 	}
 	return user, nil
 }
