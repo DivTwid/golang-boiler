@@ -20,10 +20,34 @@ func NewDummyController() *DummyController {
 	}
 }
 
+// GetVals 		 godoc
+// @Summary      List accounts
+// @Description  get accounts
+// @Tags         accounts
+// @Accept       json
+// @Produce      json
+// @Param        q    query     string  false  "name search by q"  Format(email)
+// @Success      200
+// @Failure      400
+// @Failure      404
+// @Failure      500
+// @Router       /api/GetVal [get]
 func (d DummyController) GetVal(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, d.ds.GetVal())
 }
 
+// AddVals 		 godoc
+// @Summary      Add Values
+// @Description  get accounts
+// @Tags         accounts
+// @Accept       json
+// @Produce      json
+// @Param        q    query     string  false  "name search by q"  Format(email)
+// @Success      200
+// @Failure      400
+// @Failure      404
+// @Failure      500
+// @Router       /api/addVals [post]
 func (d DummyController) AddVal(ctx *gin.Context) {
 	bind := dto.UserDto{}
 	ctx.ShouldBindJSON(&bind)

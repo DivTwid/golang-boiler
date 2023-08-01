@@ -2,13 +2,12 @@ package cron
 
 import (
 	"fmt"
-	"time"
 
 	"github.com/jasonlvhit/gocron"
 )
 
 func task() {
-	fmt.Println("test", time.DateTime)
+	fmt.Println("test")
 }
 func Cron() {
 	gocron.Every(10).Second().Do(task)

@@ -33,7 +33,7 @@ func SetupRouter() *gin.Engine {
 }
 
 func DummyRoutes(route *gin.Engine, ctrl controller.DummyController) {
-	authRoutes := route.Group("/", gin.BasicAuth(middleware.AuthDetails()))
+	authRoutes := route.Group("/api", gin.BasicAuth(middleware.AuthDetails()))
 	authRoutes.POST("addVal", ctrl.AddVal)
 	authRoutes.GET("getVal", ctrl.GetVal)
 }

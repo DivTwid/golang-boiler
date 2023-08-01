@@ -22,4 +22,7 @@ build:
 buildrun:
 	docker run -d -p 8000:4000 go-boiler
 
-.PHONY: runPostgresDB runMysqlDB run tidy installCompileDaemon test build buildrun
+swagger:
+	swag init
+
+.PHONY: runPostgresDB runMysqlDB run tidy installCompileDaemon test build buildrun swagger

@@ -4,13 +4,22 @@ import (
 	"log"
 
 	"github.com/DivTwid/golang-boiler/config"
-	"github.com/DivTwid/golang-boiler/cron"
 	"github.com/DivTwid/golang-boiler/db"
 	"github.com/DivTwid/golang-boiler/db/migration"
+	_ "github.com/DivTwid/golang-boiler/docs"
 	"github.com/DivTwid/golang-boiler/logs"
 	"github.com/DivTwid/golang-boiler/router"
+
+	swaggerFiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
+// @title Go-boiler service
+// @version 1.0
+// @description Go Boiler plate to start with go and gingonic
+
+// @host localhost:4000
+// @BasePath /api
 func main() {
 	// Load Config
 	config, err := config.LoadConfig()
@@ -27,9 +36,10 @@ func main() {
 	logs.InitLogger()
 	//SetupRoutes
 	routes := router.SetupRouter()
+	routes.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	routes.Run(":" + config.App.Port)
 	//Cron
-	cron.Cron()
+	// cron.Cron()
 
 }
 
